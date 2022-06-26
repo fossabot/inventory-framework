@@ -113,7 +113,7 @@ public abstract class AbstractViewSlotContext extends BaseViewContext implements
 
     @Override
     public final <T> T data(@NotNull String key) {
-        final Map<String, Object> data = backingItem.getData();
+        final Map<String, Object> data = getBackingItem().getData();
         if (data != null && data.containsKey(key))
             //noinspection unchecked
             return (T) data.get(key);
@@ -140,7 +140,27 @@ public abstract class AbstractViewSlotContext extends BaseViewContext implements
     }
 
     @Override
+    public final void back() {
+        getParent().back();
+    }
+
+	@Override
+	public final void back(@NotNull Viewer viewer) {
+		getParent().back(viewer);
+	}
+
+	@Override
+    public final void advance() {
+        getParent().advance();
+    }
+
+	@Override
+	public final void advance(@NotNull Viewer viewer) {
+		getParent().advance(viewer);
+	}
+
+	@Override
     public <T> PaginatedViewContext<T> paginated() {
-        return parent.paginated();
+        return getParent().paginated();
     }
 }

@@ -233,4 +233,28 @@ class BaseViewContext extends AbstractVirtualView implements ViewContext {
         }
         return null;
     }
+
+    private void openFromHistory(Viewer viewer, int direction) {
+		// TODO
+	}
+
+    @Override
+    public void back() {
+        getViewers().forEach(this::back);
+    }
+
+	@Override
+	public void back(@NotNull Viewer viewer) {
+		openFromHistory(viewer, -1);
+	}
+
+	@Override
+    public void advance() {
+        getViewers().forEach(this::advance);
+    }
+
+	@Override
+	public void advance(@NotNull Viewer viewer) {
+		openFromHistory(viewer, 1);
+	}
 }

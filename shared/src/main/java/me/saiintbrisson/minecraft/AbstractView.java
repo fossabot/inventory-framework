@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -345,7 +346,10 @@ public abstract class AbstractView extends AbstractVirtualView {
     }
 
     final ViewContext getContext(@NotNull Predicate<ViewContext> predicate) {
-        return contexts.stream().filter(predicate).findFirst().orElse(null);
+        return contexts.stream()
+                .filter(predicate)
+                .findFirst()
+                .orElse(null);
     }
 
     public final boolean isCancelOnClick() {
