@@ -479,6 +479,17 @@ public abstract class AbstractView extends AbstractVirtualView {
         super.scheduleUpdate(delayInTicks, intervalInTicks);
     }
 
+	final void resume(@NotNull ViewContext context) {
+		final ViewContextHistory history;
+		try {
+			history = context.getHistory();
+		} catch (final Throwable e) {
+			throw new IllegalStateException("Failed to access context history", e);
+		}
+
+		// TODO do it
+	}
+
     /** {@inheritDoc} */
     @Override
     public final void inventoryModificationTriggered() {

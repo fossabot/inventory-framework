@@ -22,12 +22,14 @@ class BaseViewContext extends AbstractVirtualView implements ViewContext, ViewCo
     private final AbstractView root;
     private final ViewContainer container;
     private final ViewContextAttributes attributes;
+	private final ViewContextStore store;
 
     protected BaseViewContext(
             final @NotNull AbstractView root, final @Nullable ViewContainer container) {
         this.root = root;
         this.container = container;
         this.attributes = new ViewContextAttributes(container);
+		this.store = new ViewContextStore(this);
     }
 
     @Override
@@ -225,11 +227,6 @@ class BaseViewContext extends AbstractVirtualView implements ViewContext, ViewCo
         return vf.getFactory().createSlotContext(item, this, 0, null);
     }
 
-	@Override
-	public @NotNull ViewContextHistory getHistory() {
-		return this;
-	}
-
 	private ViewItem tryResolveRef(final AbstractVirtualView view, final String key) {
         for (final ViewItem item : view.getItems()) {
             if (item == null) continue;
@@ -239,8 +236,9 @@ class BaseViewContext extends AbstractVirtualView implements ViewContext, ViewCo
         return null;
     }
 
-    private void openFromHistory(Viewer viewer, int direction) {
-		// TODO
+	@Override
+	public @NotNull ViewContextHistory getHistory() {
+		return this;
 	}
 
     @Override
@@ -250,7 +248,7 @@ class BaseViewContext extends AbstractVirtualView implements ViewContext, ViewCo
 
 	@Override
 	public void back(@NotNull Viewer viewer) {
-		openFromHistory(viewer, -1);
+		throw new UnsupportedOperationException("Not implemented yet");
 	}
 
 	@Override
@@ -260,6 +258,6 @@ class BaseViewContext extends AbstractVirtualView implements ViewContext, ViewCo
 
 	@Override
 	public void advance(@NotNull Viewer viewer) {
-		openFromHistory(viewer, 1);
+		throw new UnsupportedOperationException("Not implemented yet");
 	}
 }
