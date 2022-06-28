@@ -139,24 +139,9 @@ public abstract class AbstractViewSlotContext extends BaseViewContext implements
         return parent;
     }
 
-    @Override
-    public final void back() {
-        getParent().back();
-    }
-
 	@Override
-	public final void back(@NotNull Viewer viewer) {
-		getParent().back(viewer);
-	}
-
-	@Override
-    public final void advance() {
-        getParent().advance();
-    }
-
-	@Override
-	public final void advance(@NotNull Viewer viewer) {
-		getParent().advance(viewer);
+	public final @NotNull ViewContextHistory getHistory() {
+		return getParent().getHistory();
 	}
 
 	@Override

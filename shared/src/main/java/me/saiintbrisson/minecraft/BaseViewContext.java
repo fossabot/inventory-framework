@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 @Setter
 @RequiredArgsConstructor
 @ToString(callSuper = true)
-class BaseViewContext extends AbstractVirtualView implements ViewContext {
+class BaseViewContext extends AbstractVirtualView implements ViewContext, ViewContextHistory {
 
     private final AbstractView root;
     private final ViewContainer container;
@@ -225,7 +225,12 @@ class BaseViewContext extends AbstractVirtualView implements ViewContext {
         return vf.getFactory().createSlotContext(item, this, 0, null);
     }
 
-    private ViewItem tryResolveRef(final AbstractVirtualView view, final String key) {
+	@Override
+	public @NotNull ViewContextHistory getHistory() {
+		return this;
+	}
+
+	private ViewItem tryResolveRef(final AbstractVirtualView view, final String key) {
         for (final ViewItem item : view.getItems()) {
             if (item == null) continue;
             if (item.getReferenceKey() == null) continue;

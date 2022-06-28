@@ -251,25 +251,8 @@ public interface ViewContext extends VirtualView {
     @NotNull
     ViewContextAttributes getAttributes();
 
-    /**
-     * TODO
-     *
-     * @throws IllegalStateException nothing to back
-     */
-    @ApiStatus.Experimental
-    @ApiStatus.AvailableSince("2.5.1")
-    void back();
+	@ApiStatus.Experimental
+	@NotNull
+	ViewContextHistory getHistory();
 
-	void back(@NotNull Viewer viewer);
-
-    /**
-     * TODO
-     *
-     * @throws IllegalStateException nothing to advance
-     */
-    @ApiStatus.Experimental
-    @ApiStatus.AvailableSince("2.5.1")
-    void advance();
-
-	void advance(@NotNull Viewer viewer);
 }
