@@ -17,19 +17,20 @@ import org.jetbrains.annotations.Nullable;
 @Setter
 @RequiredArgsConstructor
 @ToString(callSuper = true)
-class BaseViewContext extends AbstractVirtualView implements ViewContext, ViewContextHistory {
+class BaseViewContext extends AbstractVirtualView implements ViewContext {
 
     private final AbstractView root;
     private final ViewContainer container;
     private final ViewContextAttributes attributes;
-	private final ViewContextStore store;
+
+	private final ViewContextHistory history;
 
     protected BaseViewContext(
             final @NotNull AbstractView root, final @Nullable ViewContainer container) {
         this.root = root;
         this.container = container;
         this.attributes = new ViewContextAttributes(container);
-		this.store = new ViewContextStore(this);
+		this.history = new ViewContextHistory(this);
     }
 
     @Override
@@ -236,11 +237,6 @@ class BaseViewContext extends AbstractVirtualView implements ViewContext, ViewCo
         return null;
     }
 
-	@Override
-	public @NotNull ViewContextHistory getHistory() {
-		return this;
-	}
-
     @Override
     public void back() {
         getViewers().forEach(this::back);
@@ -258,6 +254,6 @@ class BaseViewContext extends AbstractVirtualView implements ViewContext, ViewCo
 
 	@Override
 	public void advance(@NotNull Viewer viewer) {
-		throw new UnsupportedOperationException("Not implemented yet");
+
 	}
 }
